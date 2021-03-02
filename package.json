@@ -1,19 +1,37 @@
 {
   "name": "mad9124-w21-a2-mongo-crud",
-  "version": "0.1.0",
-  "description": "",
+  "version": "1.0.0",
+  "description": "MAD9124 Mobile API Development",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "DEBUG=mad9124-w21-a2-mongo-crud* nodemon server.js"
   },
   "keywords": [
     "MAD9124",
     "W21"
   ],
-  "author": "",
+  "author": "Ekta Dudhatra <dudh0004@algonquinlive.com>",
   "contributors": [
     "Robert McKenney <mckennr@algonquincollege.com>"
   ],
   "license": "ISC",
-  "private": true
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MAD9124/mad9124-w21-a2-mongo-crud.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MAD9124/mad9124-w21-a2-mongo-crud/issues"
+  },
+  "homepage": "https://github.com/MAD9124/mad9124-w21-a2-mongo-crud#readme",
+  "dependencies": {
+    "debug": "^4.3.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.18",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
