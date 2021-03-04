@@ -11,6 +11,6 @@ app.use(express.json())
 app.use(sanitizeMongo())
 
 app.use('/api/students', require('./routes/students'))
-// app.use('/api/courses', require('./routes/courses'))
+app.use('/api/courses', require('./routes/courses'))
 
 module.exports = app
