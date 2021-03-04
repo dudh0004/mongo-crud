@@ -31,4 +31,15 @@ function sendResourceNotFound(req, res) {
     })
 }
 
+router.post('/', sanitizeBody, async (req, res) => {
+    try {
+        const newStudent = new Student(req.sanitizedBody)
+        await newStudent.save()
+        res.send({data: newStudent})
+        } catch (err) {
+        sendResourceNotFound(err)
+        }
+    })
+
+
 module.exports = router
