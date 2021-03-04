@@ -70,6 +70,17 @@ router.put('/:id', sanitizeBody, async (req, res) => {
     }
 })
 
+router.delete('/:id', sanitizeBody, async (req, res) => {
+    try { 
+        const course = await Course.findByIdAndRemove(req.params.id)
+        if (!course) {
+            throw new Error('Resource not found')
+        }
+        res.send({data: course})
+        } catch (err) {
+            sendResourceNotFound(req, res)
+    }
+})
 
 function sendResourceNotFound(req, res) {
     res.status(404).send({
