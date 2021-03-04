@@ -9,14 +9,14 @@ router.get('/', sanitizeBody, async (req, res) => {
 
 router.get('/:id', sanitizeBody, async (req, res) => {
     try {
-    const student = await Student.findById(req.params.id)
-    if (!student) {
-    throw new Error('Resource not found')
-    }
-    res.send({data: student})
-    } catch (err) {
-        sendResourceNotFound(req, res);
-    }
+        const student = await Student.findById(req.params.id)
+        if (!student) {
+            throw new Error('Resource not found')
+        }
+        res.send({data: student})
+        } catch (err) {
+            sendResourceNotFound(req, res);
+        }
 })
 
 router.post('/', sanitizeBody, async (req, res) => {
@@ -32,14 +32,13 @@ router.post('/', sanitizeBody, async (req, res) => {
 router.patch('/:id', sanitizeBody, async (req, res) => {
     const {_id, id, ...otherAttributes} = req.sanitizedBody
     try { 
-    const student = await Student.findByIdAndUpdate(
+        const student = await Student.findByIdAndUpdate(
         req.params.id, 
         {_id: req.params.id, ...otherAttributes}, 
         {
             new: true,
             runValidators: true
-        }
-    )
+        })
     if (!student) {
         throw new Error('Resource not found')
     }
@@ -52,7 +51,7 @@ router.patch('/:id', sanitizeBody, async (req, res) => {
 router.put('/:id', sanitizeBody, async (req, res) => {
     const {_id, id, ...otherAttributes} = req.sanitizedBody
     try { 
-    const student = await Student.findByIdAndUpdate(
+        const student = await Student.findByIdAndUpdate(
         req.params.id, 
         {_id: req.params.id, ...otherAttributes}, 
         {
@@ -68,6 +67,18 @@ router.put('/:id', sanitizeBody, async (req, res) => {
     } catch (err) {
         sendResourceNotFound(req, res)
     }
+})
+
+router.delete('/:id', sanitizeBody, async (req, res) => {
+    try { 
+        const student = await Student.findByIdAndRemove(req.params.id)
+        if (!student) {
+            throw new Error('Resource not found')
+        }
+        res.send({data: student})
+        } catch (err) {
+            sendResourceNotFound(req, res)
+        }
 })
 
 function sendResourceNotFound(req, res) {
