@@ -49,6 +49,26 @@ router.patch('/:id', sanitizeBody, async (req, res) => {
     }
 })
 
+router.put('/:id', sanitizeBody, async (req, res) => {
+    const {_id, id, ...otherAttributes} = req.sanitizedBody
+    try { 
+    const student = await Student.findByIdAndUpdate(
+        req.params.id, 
+        {_id: req.params.id, ...otherAttributes}, 
+        {
+            new: true,
+            overwrite: true,
+            runValidators: true
+        }
+    )
+    if (!student) {
+        throw new Error('Resource not found')
+    }
+    res.send({data: student})
+    } catch (err) {
+        sendResourceNotFound(req, res)
+    }
+})
 
 function sendResourceNotFound(req, res) {
     res.status(404).send({
