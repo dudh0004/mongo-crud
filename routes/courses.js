@@ -19,6 +19,16 @@ router.get('/:id', sanitizeBody, async (req, res) => {
     }
 })
 
+router.post('/', sanitizeBody, async (req, res) => {
+    try {
+        const newCourse = new Course(req.sanitizedBody)
+        await newCourse.save()
+        res.send({data: newCourse})
+        } catch (err) {
+        sendResourceNotFound(err)
+        }
+    })
+
 function sendResourceNotFound(req, res) {
     res.status(404).send({
         errors: [
