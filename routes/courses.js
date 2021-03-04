@@ -7,6 +7,17 @@ router.get('/', sanitizeBody, async (req, res) => {
     res.send({data: course})
 })
 
+router.get('/:id', sanitizeBody, async (req, res) => {
+    try {
+        const course = await Course.findById(req.params.id).populate('student')
+    if (!course) {
+        throw new Error('Resource not found')
+    }
+    res.send({data: course})
+    } catch (err) {
+        sendResourceNotFound(req, res);
+    }
+})
 
 function sendResourceNotFound(req, res) {
     res.status(404).send({
